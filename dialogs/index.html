@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dialog Demo</title>
+</head>
+<body>
+    <button id="openDialog">Open File Dialog</button>
+    <button id="saveDialog">Save file dialog</button>
+    <button id="messageBox">Show message box</button>
+    <button id="errorBox">Show Error box</button>
+    <script>
+        document.getElementById('openDialog').addEventListener('click', async ()=>{
+            const filePaths= await window.dialog.showOpenDialog();
+            console.log(`filePaths: ${filePaths}`)
+        })
+
+        document.getElementById('saveDialog').addEventListener('click', async () => {
+            const filePath= await window.dialog.showOpenDialog();
+            console.log(`filePath: ${filePath}`);
+        })
+
+        document.getElementById('messageBox').addEventListener('click', async () => {
+            const response = await window.dialog.showMessageBox()
+            console.log(`response: ${response}`);
+        })
+
+        document.getElementById('errorBox').addEventListener('click', async () => {
+            window.dialog.showErrorBox();
+        })
+
+    </script>
+</body>
+</html>

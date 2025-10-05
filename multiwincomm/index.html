@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Electron Communication</title>
+</head>    
+<body>
+    <h1>Electron IPC Communication</h1>
+    <button id="send">request data from main process</button>
+    <script>
+        const sendButton=document.getElementById('send');
+        sendButton.addEventListener('click', ()=>{
+            window.electronAPI.requestData('event-1234')
+        })
+
+        window.electronAPI.onMessage((event, message => {
+            console.log('received data from process: ', message);
+            window.electronAPI.respondToMainProcess('event-1234', 'data already be processed: '+message)
+        }))
+    </script>
+</body>
+</html>

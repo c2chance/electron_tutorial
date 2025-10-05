@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Second Window</title>
+</head>
+<body style="background-color: blanchedalmond;">
+    <h1>Second Window</h1>
+    <p>Welcome to second window</p>
+    <br>
+    <button id="close-window">Close the window</button>
+</body>
+<script>
+    document.getElementById('close-window').addEventListener('click', ()=>{
+        window.electronAPI.closeSecondWindow();
+    });
+</script>
+</html>
