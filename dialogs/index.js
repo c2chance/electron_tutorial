@@ -10,7 +10,7 @@ function createWindow() {
             enableRemoteModule: false
         }
     })
-    win.loadFile('dialogs/index.html')
+    win.loadFile(path.join(__dirname, 'index.html'));
     win.webContents.openDevTools();
 }
 

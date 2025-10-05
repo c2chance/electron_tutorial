@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello Electron!</title>
+    <style>
+        table,th,td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        th,td {padding: 10px;}
+    </style>
+</head>
+<body>
+    <table id="dataTable">
+        <tr>
+            <th>ID</th>
+            <th>Message</th>
+        </tr>
+    </table>
+    <p></p>
+    <button id="addButton">Add</button>
+    <button id="closeButton">Close</button>
+    <script>
+        document.getElementById('addButton').addEventListener('click', function() {
+            const table = document.getElementById('dataTable')
+            const newRow=table.insertRow();
+            const cell1=newRow.insertCell(0);
+            const cell2 =newRow.insertCell(1);
+            cell1.innerHTML = table.rows.length -1;
+            cell2.innerHTML = `message ${table.rows.length-1}`
+        })
+        document.getElementById('closeButton').addEventListener('click', function() {
+            window.electronAPI.closeApp()
+        })
+    </script>
+    <h1>Hello, Electron!</h1>
+    <p>Welcome to your Electron Application</p>
+</body>
+</html>

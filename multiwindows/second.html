@@ -8,10 +8,11 @@
     <h1>Second Window</h1>
     <p>Welcome to second window</p>
     <br>
-    <button id="close-window">Close the window</button>
+    <button id="close-window">Close the current window</button>
 </body>
 <script>
     document.getElementById('close-window').addEventListener('click', ()=>{
+        // 
         window.electronAPI.closeSecondWindow();
     });
 </script>

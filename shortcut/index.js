@@ -4,7 +4,7 @@ function createWindow() {
         width: 800, height: 600,
     })
 
-    win.loadFile('index.html');
+    win.loadFile(path.join(__dirname, 'index.html'));
 }
 
 app.whenReady().then(() => {

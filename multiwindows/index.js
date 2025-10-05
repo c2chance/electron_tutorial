@@ -13,7 +13,7 @@ function createMainWindow() {
         }
     })
 
-    mainWindow.loadFile('index.html');
+    mainWindow.loadFile(path.join(__dirname, 'index.html'));
     mainWindow.webContents.openDevTools();
     mainWindow.on('closed', () => {
         mainWindow = null;
@@ -32,15 +32,17 @@ function createSecondWindow() {
             }
         })
 
-        secondWindow.loadFile('multiwindows/second.html');
+        secondWindow.loadFile(path.join(__dirname, 'second.html'));
         secondWindow.on('closed', () => {
             secondWindow = null
         })
     } else {
+        // show the second window
         secondWindow.show()
     }
 }
 
+// receive close-second-window message (send by snd window)
 ipcMain.on('close-second-window', () => {
     if (secondWindow) {
         secondWindow.close();
@@ -48,7 +50,9 @@ ipcMain.on('close-second-window', () => {
     }
 })
 
+// receive open-second-window message (send by Main Window)
 ipcMain.on('open-second-window', createSecondWindow)
+
 app.whenReady().then(createMainWindow);
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {

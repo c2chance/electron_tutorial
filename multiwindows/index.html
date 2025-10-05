@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Multi-windows in Electron</title>
+</head>
+<body style="background-color: blanchedalmond;">
+    <h1>Hello, Electron!</h1>
+    <p>Main Window</p>
+    <br>
+    <button id="create-new-window">New Window</button>
+</body>
+<script>
+    document.getElementById('create-new-window').addEventListener('click', ()=>{
+        window.electronAPI.openSecondWindow();
+    });
+</script>
+</html>
