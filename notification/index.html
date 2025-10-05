@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Notification</title>
+</head>
+<body style="background-color: blanchedalmond;">
+    <h1>Notification API</h1>
+    <p>Welcome to practise your Electron Skills</p>
+    <br>
+    <button id="demo-note">Demo Note</button>
+</body>
+<script>
+    document.getElementById('demo-note').addEventListener('click', ()=> {
+        window.electron.showNotification('Demo Note', 'Welcome to electron');
+    })    
+</script>
+</html>
