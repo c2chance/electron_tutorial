@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Hello Electron!</title>
+    <title>Electron Components</title>
     <style>
         table,th,td {
             border: 1px solid black;
@@ -12,6 +12,8 @@
     </style>
 </head>
 <body>
+    <h2>Hello, Electron!</h2>
+    <p>Electron Components Application</p>    
     <table id="dataTable">
         <tr>
             <th>ID</th>
@@ -22,19 +24,20 @@
     <button id="addButton">Add</button>
     <button id="closeButton">Close</button>
     <script>
+        // 
         document.getElementById('addButton').addEventListener('click', function() {
             const table = document.getElementById('dataTable')
             const newRow=table.insertRow();
             const cell1=newRow.insertCell(0);
             const cell2 =newRow.insertCell(1);
-            cell1.innerHTML = table.rows.length -1;
+            cell1.innerHTML = table.rows.length -1; // 
             cell2.innerHTML = `message ${table.rows.length-1}`
         })
+
         document.getElementById('closeButton').addEventListener('click', function() {
+            // 
             window.electronAPI.closeApp()
         })
     </script>
-    <h1>Hello, Electron!</h1>
-    <p>Welcome to your Electron Application</p>
 </body>
 </html>

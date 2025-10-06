@@ -19,6 +19,7 @@ function showNotification() {
         title: 'Electron Notification',
         body: 'This is a message from the Main Process!'
     });
+
     notification.show();
 }
 
