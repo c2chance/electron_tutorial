@@ -44,6 +44,15 @@ function createWindow() {
                     {label:'Exit',role:'quit'}
                 ]
 
+            },
+            {
+                label: 'View', submenu: [
+                    {label:'Explorer', click:(menuItem)=>{console.log(`${menuItem.label} - click`)}},
+                    {label:'Search', click:(menuItem)=>{console.log(`${menuItem.label} - click`)}},
+                    {type: 'separator' },
+                    {label: 'Terminal', click:()=>{}},
+                    {label:'Output', role:'quit'}
+                ]
             }
     ])
 

@@ -1,4 +1,5 @@
 const { contextBridge, ipcRenderer } = require('electron')
+// 
 contextBridge.exposeInMainWorld('dialog', {
     showOpenDialog: () => ipcRenderer.invoke('show-open-dialog'),
     showSaveDialog: () => ipcRenderer.invoke('show-save-dialog'),
