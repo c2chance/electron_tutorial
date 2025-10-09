@@ -2,7 +2,7 @@
   "name": "learning_electron",
   "version": "1.0.0",
   "description": "",
-  "main": "menu/index.js",
+  "main": "audio_player/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
@@ -13,6 +13,13 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "docx": "^9.5.1",
     "electron": "^38.2.1"
+  },
+  "devDependencies": {
+    "express": "^5.1.0",
+    "jimp": "^1.6.0",
+    "mammoth": "^1.11.0",
+    "sharp": "^0.34.4"
   }
 }

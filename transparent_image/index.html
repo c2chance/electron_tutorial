@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Half-Transparent window</title>
+    <style>
+        body, html {
+            width: 100%; height: 100%;
+            margin: 0;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.5);
+            font-family: Arial, sans-serif;
+            -webit-app-region: drag;
+        }
+        button {
+            -webkit-app-region: no-drag;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Hello</h1>
+    <button onclick="handleClose()" style="background-color: red;">Close</button>
+    <script>
+        function handleClose() {
+            window.api.closeWindow()
+        }
+    </script>
+</body>
+</html>

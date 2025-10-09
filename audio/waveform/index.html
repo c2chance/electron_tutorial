@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Waveform Viewer</title>
+    <style>
+        #waveformContainer{
+            width: 100%;
+            height: 400px;
+            margin-top: 20px;
+        }
+        canvas {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <button id="openFile">Open Audio File</button>
+    <div id="waveformContainer">
+        <canvas id="waveform"></canvas>
+    </div>
+</body>
+<script>
+    document.getElementById('openFile').addEventListener('click', async()=>{
+        const filePath=await window.electronAPI.selectFile();
+        if (!filePath) return;
+
+        window.electronAPI.onFileProcessed((waveform)=>{
+            if (Array.isArray(waveform)) {
+                const downsampled = waveform.filter((_, index)=>index%100===0);
+                const ctx=document.getElementById('wavaform').getContext('2d');
+                if (window.myChart) {
+                    window.myChart.destroy();
+                }
+                window.myChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: downsampled.map((_,i)=>i.toString()),
+                        dtasets: [{
+                            label: 'Audio Waveform',
+                            data: downsampled,
+                            borderColor: 'rgb(75, 192, 192)',
+                            borderWidth: 1
+                        }]
+                    }
+                })
+            } else {
+                console.error('Waveform is not an array: ', waveform);
+            }
+        })
+    })
+</script>
+</html>

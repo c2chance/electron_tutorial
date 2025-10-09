@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Player</title>
+    <script src="https://cdn.jsdelivr.net/npm/howler@2.2.4/dist/howler.min.js"></script>
+</head>
+<body>
+    <button id="open">Open</button>
+    <button id="play">Play</button>
+    <button id="pause">Pause</button>
+    <button id="stop">Stop</button>
+    <p></p>
+    <input type="range" id="seeker" min="0" value="0" style="width:185px">
+</body>
+<script>
+    let sound;
+    let duration=0;
+    
+    document.getElementById('open').addEventListener('click', async ()=>{
+        const {canceled, filePaths}=await window.electronAPI.openFileDialog();
+        console.log(`filePaths: ${filePaths}`);
+        if (!canceled) {
+            sound = new Howl({
+                src: [filePaths[0]],
+                html5: true,
+                onplay: ()=>{
+                    duration=sound.duration();
+                    document.getElementById('seeker').max=duration*1000;
+                },
+                onend: ()=> { alert('The Audio play end.')}
+            })
+        }
+    })
+
+    document.getElementById('play').addEventListener('click', ()=>{
+        if (sound) sound.play();
+    })
+    document.getElementById('pause').addEventListener('click', ()=>{
+        if (sound) sound.pause();
+    })
+    document.getElementById('stop').addEventListener('click', ()=>{
+        if (sound) sound.stop();
+    })
+
+    const seeker = document.getElementById('seeker');
+    seeker.addEventListener('input', ()=>{
+        if (sound) sound.seek(seeker.value/1000);
+    });
+
+    setInterval(()=>{
+        if (sound && sound.playing()) {
+            seeker.value = sound.seek()*1000;
+        }
+    }, 100)
+</script>
+</html>

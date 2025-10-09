@@ -1,20 +1,28 @@
-const canvas = document.querySelector('canvas');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-let painting = false;
-let currentColor = 'black'
+const { app, BrowserWindow, globalShortcut, screen } = require("electron");
+const path = require("path");
 
-function startPosition(e) {
-    painting = true;
-    draw(e)
+function createWindow() {
+  const { width, height } = screen.getPrimaryDisplay().workAreaSize;
+  const mainWindow = new BrowserWindow({
+    width: width,
+    height: height,
+    frame: false,
+    transparent: true,
+    webPreference: {
+      nodeIntegration: true,
+      contextIsolation: false,
+    },
+  });
+
+  mainWindow.loadFile(path.join(__dirname, "index.html"));
+  mainWindow.maximize();
+  globalShortcut.register("Esc", () => {
+    app.quit();
+  });
+
+  app.on("window-all-closed", () => {
+    app.quit();
+  });
 }
 
-function finishPosition() {
-    painting = false;
-    ctx.beginPath();
-}
-
-function draw(e) {
-    
-}
+app.whenReady().then(createWindow);

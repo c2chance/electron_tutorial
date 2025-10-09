@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recorder</title>
+</head>
+<body>
+    <button id="start">Recording</button>
+    <button id="stop">Stop</buttton>
+</body>
+<script>
+    let mediaRecorder;
+    let audioChunks = [];
+
+    document.getElementById('start').addEventListener('click', ()=>{
+        navigator.mediaDevices.getUserMedia({audio: true})
+            .then(stream=>{
+                mediaRecorder = new MediaRecorder(stream);
+                mediaRecorder.start();
+                audioChunks=[];
+
+                mediaRecorder.addEventListener('dataavaiable', event=>{
+                    audioChunks.push(event.data);
+                })
+            })
+    })
+
+    document.getElementById('stop').addEventListener('click', ()=>{
+        mediaRecorder.stop();
+
+        mediaRecorder.addEventListener('stop', ()=>{
+            const audioBlob = new Blob(audioChunks);
+            const reader = new FileReader();
+            reader.readAsArrayBuffer(audioBlob);
+            reader.onloadend=()=>{
+                window.electronAPI.saveAudioFile(reader.result)
+                    .then(savedPath=>{
+                        console.log(`Saved file path: ${savedPath}`);
+                    })
+            }
+
+        })
+    })
+</script>
+</html>

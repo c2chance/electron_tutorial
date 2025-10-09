@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Animated Button Example</title>
+    <style>
+        #animatedButton {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            transition: background-color 3s, width 2s, height 2s;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%)
+        }
+    </style>
+</head>
+<body>
+    <button id="animatedButton">Click me</button>
+</body>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const button = document.getElementById('animatedButton');
+    let isExpanded = false;
+
+    button.addEventListener('click', function() {
+        if (isExpanded) {
+            button.style.width = '100px';
+            button.style.height = '100px';
+            button.style.backgroundColor = 'red';
+        } else {
+            button.style.width = '300px';
+            button.style.height = '300px';
+            button.style.backgroundColor = 'green';
+        }
+        isExpanded = !isExpanded;
+    })
+})        
+</script>
+</html>
